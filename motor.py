@@ -63,14 +63,14 @@ def add_entry():
     flash('New entry was successfully added !')
     return redirect(url_for('show_entries'))
 
-@app.route('/search', methods = ['POST'])
+@app.route('/search', methods = ['GET'])
 def search():
     if not session.get('logged_in'):
         abort(401)
-    string = '%' + '%'.join(request.form['key_string']) + '%'
+    string = '%' + '%'.join(request.args['key_string']) + '%'
     db = get_db()
     cur = db.execute('select title, source from entries where title like ?',
-                      [string])
+                     [string])
     entries = cur.fetchall()
     return render_template('search.html', entries = entries)
 
