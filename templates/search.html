@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+    {% if session.logged_in %}
+        <ul class = search_results>
+        {% for entry in entries %}
+            <li> <h2> {{ entry.title }} </h2> {{ entry.source|safe }}
+        {% else %}
+            <li> <em> No macthing search results found ! </em>
+        {% endfor %}
+        </ul>
+     {% endif %}
+{% endblock %}

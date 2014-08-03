@@ -63,6 +63,17 @@ def add_entry():
     flash('New entry was successfully added !')
     return redirect(url_for('show_entries'))
 
+@app.route('/search', methods = ['POST'])
+def search():
+    if not session.get('logged_in'):
+        abort(401)
+    string = '%' + '%'.join(request.form['key_string']) + '%'
+    db = get_db()
+    cur = db.execute('select title, source from entries where title like ?',
+                      [string])
+    entries = cur.fetchall()
+    return render_template('search.html', entries = entries)
+
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     error = None
