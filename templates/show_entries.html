@@ -10,15 +10,14 @@
                 <dd> <input type = submit value = Add>
             </dl>
         </form>
+        <form action = "{{ url_for('search') }}" method = post class = search>
+            <dl>
+                <dt> Search:
+                <dd> <input type = text size = 30 name = key_string>
+                <dd> <input type = submit value = Search>
+            </dl>
+        </form>
     {% endif %}
-    
-    <form action = "{{ url_for('search') }}" method = post class = search>
-        <dl>
-            <dt> Search:
-            <dd> <input type = text size = 30 name = key_string>
-            <dd> <input type = submit value = Search>
-        </dl>
-    </form>
 
     <ul class = entries>
     {% for entry in entries %}
